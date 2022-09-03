@@ -1,18 +1,28 @@
 import { createSlice, nanoid } from "@reduxjs/toolkit";
 
-const id1 = nanoid();
-const id2 = nanoid();
+import shoes from '../../resources/shoes.jpg'
+import socks from '../../resources/socks.jpg'
+import top from '../../resources/top.jpeg'
+
 
 const initialState = {
-    [id1]: {
-        title: "Men's black leather shoes everyday wear business casual",
-        imgSource: "https://cdn.shopify.com/s/files/1/0472/7118/2499/products/62163450839_480x480.jpg?v=1638759200",
-        price: 7.99
+    "1001": {
+        title: "Men's brown leather shoes everyday wear business casual",
+        imgSource: shoes,
+        price: 25.99,
+        categoryId: "101"
     },
-    [id2]: {
-        title: "Men's athletic sweatproof cotton socks 5 pairs",
-        imgSource: "https://oldnavy.gap.com/webcontent/0015/244/786/cn15244786.jpg",
-        price: 4.99
+    "1002": {
+        title: "Men's black gray athletic sweatproof cotton socks six pairs",
+        imgSource: socks,
+        price: 14.99,
+        categoryId: "101"
+    },
+    "1003": {
+        title: "Women's navy blue breathable workout top relaxed fit",
+        imgSource: top,
+        price: 17.99,
+        categoryId: "102"
     }
 }
 const itemsSlice = createSlice({
