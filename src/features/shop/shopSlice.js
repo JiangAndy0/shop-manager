@@ -14,13 +14,17 @@ const shopSlice = createSlice({
     initialState,
     reducers: {
         setActiveCategoryId(state, action){
-            state.activeCategoryId = action.payload;
+            state.activeCategoryId = action.payload
+            state.activeItemId = ''
+        },
+        setActiveItemId(state, action){
+            state.activeItemId = action.payload
         }
     }
 })
 
 export default shopSlice.reducer
-export const { setActiveCategoryId } = shopSlice.actions
+export const { setActiveCategoryId, setActiveItemId } = shopSlice.actions
 
 
 
