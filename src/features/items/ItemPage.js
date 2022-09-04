@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useParams } from "react-router-dom";
 
+import { ItemBasicInfo } from "./ItemBasicInfo";
 import { selectItemById } from "./itemsSlice";
 
 export const ItemPage = () => {
@@ -9,9 +10,7 @@ export const ItemPage = () => {
     const item = useSelector(state => selectItemById(state, params.itemId));
     return (
         <div id="item-page">
-            <img src={item.imgSource} alt="thumbnail for item" />
-            <h2>{item.title}</h2>
-            <span>${item.price}</span>
+            <ItemBasicInfo itemId={params.itemId} />
             <ul>
                 {item.features.map((feature, index) => {
                     return (

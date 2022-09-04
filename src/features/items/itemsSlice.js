@@ -9,7 +9,9 @@ const initialState = {
     "1001": {
         title: "Men's brown leather shoes everyday wear business casual",
         imgSource: shoes,
-        price: 25.99,
+        list: 25.99,
+        percentOff: 0,
+        stock: 27,
         categoryId: "101",
         features: [
             'Made of the finest, most durable Texan leather',
@@ -20,7 +22,9 @@ const initialState = {
     "1002": {
         title: "Men's black gray athletic sweatproof cotton socks six pairs",
         imgSource: socks,
-        price: 14.99,
+        list: 14.99,
+        percentOff: 25,
+        stock: 193,
         categoryId: "101",
         features: [
             'Made with 100% breathable, soft cotton',
@@ -32,7 +36,9 @@ const initialState = {
     "1003": {
         title: "Women's navy blue breathable workout top relaxed fit",
         imgSource: top,
-        price: 17.99,
+        list: 17.99,
+        percentOff: 0,
+        stock: 118,
         categoryId: "102",
         features: [
             "Form fitting design shows off your figure",
