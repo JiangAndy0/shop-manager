@@ -14,10 +14,16 @@ const initialState = {
 const categoriesSlice = createSlice({
     name: 'categories',
     initialState,
-    reducers: {}
+    reducers: {
+        addItemToCategory(state, action){
+            const {itemId, categoryId} = action.payload;
+            state[categoryId].items[itemId] = true;
+        }
+    }
 })
 
 export default categoriesSlice.reducer
+export const {addItemToCategory} = categoriesSlice.actions;
 
 export const selectAllCategories = state => state.categories
 export const selectCategoryById = (state, categoryId) => state.categories[categoryId]

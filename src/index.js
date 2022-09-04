@@ -15,6 +15,7 @@ import {
 import { CategoryPage } from './features/categories/CategoryPage';
 import { ItemPage } from './features/items/ItemPage';
 import { Home } from './app/Home';
+import { ItemForm } from './features/items/ItemForm';
 
 const container = document.getElementById('root');
 const root = createRoot(container);
@@ -29,6 +30,7 @@ root.render(
             <Route path="categories/:categoryId" element={<CategoryPage />}/>
             <Route path="items/:itemId" element={<ItemPage />}/>
           </Route>
+          <Route path="categories/:categoryId/addItem" element={<ItemForm />}/>
         </Routes>
       </BrowserRouter>
     </Provider>

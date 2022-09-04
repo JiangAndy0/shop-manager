@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, nanoid } from "@reduxjs/toolkit";
 
 import shoes from '../../resources/shoes.jpg'
 import socks from '../../resources/socks.jpg'
@@ -51,11 +51,15 @@ const itemsSlice = createSlice({
     name: 'items',
     initialState,
     reducers: {
-
+        addItem(state, action){
+            const {itemId} = action.payload
+            state[itemId] = action.payload
+        }
     }
 })
 
 export default itemsSlice.reducer
+export const {addItem} = itemsSlice.actions
 
 export const selectAllItems = state => state.items;
 export const selectItemById = (state, itemId) => state.items[itemId];
