@@ -1,4 +1,4 @@
-import { createSlice, nanoid } from "@reduxjs/toolkit"
+import { createSlice } from "@reduxjs/toolkit"
 
 
 const initialState = {
@@ -20,3 +20,4 @@ const categoriesSlice = createSlice({
 export default categoriesSlice.reducer
 
 export const selectAllCategories = state => state.categories
+export const selectCategoryById = (state, categoryId) => state.categories[categoryId]

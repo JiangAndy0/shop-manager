@@ -1,11 +1,14 @@
 import React from 'react';
 import { useSelector } from 'react-redux/es/exports';
 
+import { Outlet } from 'react-router-dom';
+
 import { NavBar } from './app/NavBar';
 import { selectAllItems } from './features/items/itemsSlice';
 import { ItemPreview } from './features/items/ItemPreview';
 import { ItemPage } from './features/items/ItemPage';
 import { selectAllCategories } from './features/categories/categoriesSlice';
+
 
 
 const App = () => {
@@ -31,7 +34,7 @@ const App = () => {
   return (
     <div className="App">
       <NavBar />
-      {page}
+      <Outlet />
     </div>
   );
 }
