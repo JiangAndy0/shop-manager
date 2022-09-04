@@ -1,4 +1,4 @@
-import { createSlice, nanoid } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 import shoes from '../../resources/shoes.jpg'
 import socks from '../../resources/socks.jpg'
