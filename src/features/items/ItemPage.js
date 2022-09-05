@@ -1,12 +1,13 @@
 import React from "react";
 import { useSelector } from "react-redux/es/hooks/useSelector";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { ItemBasicInfo } from "./ItemBasicInfo";
 import { selectItemById } from "./itemsSlice";
 
 export const ItemPage = () => {
     const params = useParams();
+    const navigate = useNavigate();
     const item = useSelector(state => selectItemById(state, params.itemId));
     return (
         <div id="item-page">
@@ -18,6 +19,14 @@ export const ItemPage = () => {
                     )
                 })}
             </ul>
+            <button
+                onClick={ e => {
+                    e.preventDefault()
+                    navigate('edit')
+                }}
+            >
+                Edit
+            </button>
         </div>
     )
 }

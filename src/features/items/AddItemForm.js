@@ -4,9 +4,9 @@ import { useSelector, useDispatch } from "react-redux"
 import { useNavigate, useParams } from "react-router-dom"
 
 import { addItemToCategory, selectAllCategories } from "../categories/categoriesSlice"
-import { addItem } from "./itemsSlice"
+import { modifyItem } from "./itemsSlice"
 
-export const ItemForm = () => {
+export const AddItemForm = () => {
     const dispatch = useDispatch();
 
     const navigate = useNavigate();
@@ -36,7 +36,7 @@ export const ItemForm = () => {
     let featureBoxes = [];
     for (let i = 0; i < numFeatures; i++) {
         featureBoxes.push(
-            <li>
+            <li key={`featurebox${i}`}>
                 <textarea
                     value={features[i]}
                     onChange={e => setFeatures(prev => {
@@ -85,7 +85,7 @@ export const ItemForm = () => {
                         categoryId,
                         features,
                     }
-                    dispatch(addItem(item))
+                    dispatch(modifyItem(item))
                     dispatch(addItemToCategory({itemId, categoryId}))
                     navigate(`/items/${itemId}`)
                 }}

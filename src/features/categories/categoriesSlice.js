@@ -18,12 +18,17 @@ const categoriesSlice = createSlice({
         addItemToCategory(state, action){
             const {itemId, categoryId} = action.payload;
             state[categoryId].items[itemId] = true;
+        },
+        removeItemFromCategory(state, action){
+            const {itemId, categoryId} = action.payload;
+            console.log(categoryId)
+            delete state[categoryId].items[itemId];
         }
     }
 })
 
 export default categoriesSlice.reducer
-export const {addItemToCategory} = categoriesSlice.actions;
+export const {addItemToCategory, removeItemFromCategory} = categoriesSlice.actions;
 
 export const selectAllCategories = state => state.categories
 export const selectCategoryById = (state, categoryId) => state.categories[categoryId]
