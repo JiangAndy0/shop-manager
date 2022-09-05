@@ -1,11 +1,9 @@
-import { nanoid } from "@reduxjs/toolkit"
 import React, { useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { useNavigate, useParams } from "react-router-dom"
+import { useNavigate} from "react-router-dom"
 
-import { addItemToCategory, selectAllCategories } from "../categories/categoriesSlice"
-import { modifyItem } from "./itemsSlice"
-import { removeItemFromCategory } from "../categories/categoriesSlice"
+import { addItemToCategory, selectAllCategories, removeItemFromCategory} from "../../categories/categoriesSlice"
+import { modifyItem } from "../itemsSlice"
 
 export const ItemForm = (props) => {
     const dispatch = useDispatch();

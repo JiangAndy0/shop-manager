@@ -10,7 +10,7 @@ const initialState = {
         title: "Men's brown leather shoes everyday wear business casual",
         imgSource: shoes,
         list: 25.99,
-        percentOff: 0,
+        percentOff: "0",
         stock: 27,
         categoryId: "101",
         features: [
@@ -23,7 +23,7 @@ const initialState = {
         title: "Men's black gray athletic sweatproof cotton socks six pairs",
         imgSource: socks,
         list: 14.99,
-        percentOff: 25,
+        percentOff: "25",
         stock: 193,
         categoryId: "101",
         features: [
@@ -37,7 +37,7 @@ const initialState = {
         title: "Women's navy blue breathable workout top relaxed fit",
         imgSource: top,
         list: 17.99,
-        percentOff: 0,
+        percentOff: "0",
         stock: 118,
         categoryId: "102",
         features: [

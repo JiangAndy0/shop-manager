@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom"
 
 import { ItemForm } from "./ItemForm"
-import { selectItemById } from "./itemsSlice";
+import { selectItemById } from "../itemsSlice";
 
 
 export const EditItemForm = () => {

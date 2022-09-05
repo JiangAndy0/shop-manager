@@ -16,7 +16,7 @@ import { CategoryPage } from './features/categories/CategoryPage';
 import { ItemPage } from './features/items/ItemPage';
 import { Home } from './app/Home';
 import { AddItemForm } from './features/items/forms/AddItemForm';
-import { EditItemForm } from './features/items/EditItemForm';
+import { EditItemForm } from './features/items/forms/EditItemForm';
 
 const container = document.getElementById('root');
 const root = createRoot(container);
