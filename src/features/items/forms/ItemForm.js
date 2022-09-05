@@ -5,26 +5,26 @@ import { useNavigate, useParams } from "react-router-dom"
 
 import { addItemToCategory, selectAllCategories } from "../categories/categoriesSlice"
 import { modifyItem } from "./itemsSlice"
+import { removeItemFromCategory } from "../categories/categoriesSlice"
 
-export const AddItemForm = () => {
+export const ItemForm = (props) => {
     const dispatch = useDispatch();
 
     const navigate = useNavigate();
-    const params = useParams();
 
     const categories = useSelector(selectAllCategories)
     const categoryIds = Object.keys(categories)
 
-    const [title, setTitle] = useState('')
-    const [imgSource, setImgSource] = useState('')
-    const [list, setList] = useState('')
-    const [percentOff, setPercentOff] = useState('')
-    const [stock, setStock] = useState('')
-    const [categoryId, setCategoryId] = useState(params.categoryId !== '0' ? params.categoryId : categoryIds[0])
-    const [features, setFeatures] = useState([])
-    const [numFeatures, setNumFeatures] = useState(1)
+    const [title, setTitle] = useState(props.title)
+    const [imgSource, setImgSource] = useState(props.imgSource)
+    const [list, setList] = useState(props.list)
+    const [percentOff, setPercentOff] = useState(props.percentOff)
+    const [stock, setStock] = useState(props.stock)
+    const [categoryId, setCategoryId] = useState(props.categoryId)
+    const [features, setFeatures] = useState(props.features)
+    const [numFeatures, setNumFeatures] = useState(props.numFeatures)
 
-    const canSubmit = title && imgSource && list && percentOff && stock && categoryId && features && numFeatures;
+    const canSubmit = title && imgSource && list && percentOff !== '' && stock && categoryId && features && numFeatures;
 
     const categoryOptions = categoryIds.map(categoryId =>
         <option value={categoryId} key={categoryId}>
@@ -60,6 +60,57 @@ export const AddItemForm = () => {
 
     }
 
+    let saveButton;
+    if (props.formType === 'add') {
+        saveButton = <button
+            disabled={!canSubmit}
+            onClick={e => {
+                e.preventDefault()
+                const item = {
+                    itemId: props.itemId,
+                    title,
+                    imgSource,
+                    list,
+                    percentOff,
+                    stock,
+                    categoryId,
+                    features,
+                }
+                dispatch(modifyItem(item))
+                dispatch(addItemToCategory({ itemId: props.itemId, categoryId }))
+                navigate(`/items/${props.itemId}`)
+            }}
+        >
+            Save
+        </button>
+    } else if (props.formType === 'edit') {
+        saveButton = <button
+        disabled={!canSubmit}
+        onClick={e => {
+            e.preventDefault()
+            dispatch( removeItemFromCategory({
+                itemId: props.itemId, 
+                categoryId: props.prevCategoryId
+            }) )
+            const item = {
+                itemId: props.itemId,
+                title,
+                imgSource,
+                list,
+                percentOff,
+                stock,
+                categoryId,
+                features,
+            }
+            dispatch( modifyItem(item) ) 
+            dispatch( addItemToCategory({itemId: props.itemId, categoryId}) )
+            navigate(`/items/${props.itemId}`)
+        }}
+        >
+            Save
+        </button>
+    }
+
     return (
         <div>
             <button
@@ -70,28 +121,7 @@ export const AddItemForm = () => {
             >
                 Cancel
             </button>
-            <button
-                disabled={!canSubmit}
-                onClick={e => {
-                    e.preventDefault()
-                    const itemId = nanoid();
-                    const item = {
-                        itemId,
-                        title,
-                        imgSource,
-                        list,
-                        percentOff,
-                        stock,
-                        categoryId,
-                        features,
-                    }
-                    dispatch(modifyItem(item))
-                    dispatch(addItemToCategory({itemId, categoryId}))
-                    navigate(`/items/${itemId}`)
-                }}
-            >
-                Save
-            </button>
+            {saveButton}
             <form>
                 <label htmlFor="title">Title</label>
                 <input
