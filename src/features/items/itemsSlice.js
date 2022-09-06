@@ -57,12 +57,21 @@ const itemsSlice = createSlice({
         },
         removeItem(state, action){
             delete state[action.payload]
+        },
+        removeOrphanedItems(state, action){
+            const categories = action.payload
+            const itemIds = Object.keys(state)
+            itemIds.forEach(itemId => {
+                if(!categories[ state[itemId].categoryId ]) {
+                    delete state[itemId]
+                }
+            })
         }
     }
 })
 
 export default itemsSlice.reducer
-export const {modifyItem, removeItem} = itemsSlice.actions
+export const { modifyItem, removeItem, removeOrphanedItems } = itemsSlice.actions
 
 export const selectAllItems = state => state.items;
 export const selectItemById = (state, itemId) => state.items[itemId];

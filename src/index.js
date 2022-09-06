@@ -17,6 +17,7 @@ import { ItemPage } from './features/items/ItemPage';
 import { Home } from './app/Home';
 import { AddItemForm } from './features/items/forms/AddItemForm';
 import { EditItemForm } from './features/items/forms/EditItemForm';
+import { EditCategoriesForm } from './features/categories/EditCategoriesForm';
 
 const container = document.getElementById('root');
 const root = createRoot(container);
@@ -33,6 +34,7 @@ root.render(
           </Route>
           <Route path="categories/:categoryId/addItem" element={<AddItemForm />}/>
           <Route path="items/:itemId/edit" element={<EditItemForm />}/>
+          <Route path="edit" element={<EditCategoriesForm/>} />
         </Routes>
       </BrowserRouter>
     </Provider>

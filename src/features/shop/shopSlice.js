@@ -7,10 +7,17 @@ const initialState = {
 const shopSlice = createSlice({
     name: 'shop',
     initialState,
-    reducers: {}
+    reducers: {
+        changeShopName(state, action){
+            state.name = action.payload
+        }
+    }
 })
 
 export default shopSlice.reducer
+export const {changeShopName} = shopSlice.actions
+
+export const selectShopName = state => state.shop.name
 
 
 

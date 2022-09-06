@@ -20,15 +20,25 @@ const categoriesSlice = createSlice({
             state[categoryId].items[itemId] = true;
         },
         removeItemFromCategory(state, action){
-            const {itemId, categoryId} = action.payload;
+            const {itemId, categoryId} = action.payload
             console.log(categoryId)
-            delete state[categoryId].items[itemId];
+            delete state[categoryId].items[itemId]
+        },
+        modifyCategories(state, action){
+            //wipe all previous categories
+            const prevIds = Object.keys(state)
+            prevIds.forEach(id => delete state[id])
+            
+            const newCategories = Object.entries(action.payload)
+            newCategories.forEach(([categoryId, category]) => {
+                state[categoryId] = category
+            })
         }
     }
 })
 
 export default categoriesSlice.reducer
-export const {addItemToCategory, removeItemFromCategory} = categoriesSlice.actions;
+export const {addItemToCategory, removeItemFromCategory, modifyCategories} = categoriesSlice.actions;
 
 export const selectAllCategories = state => state.categories
 export const selectCategoryById = (state, categoryId) => state.categories[categoryId]
