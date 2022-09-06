@@ -1,14 +1,20 @@
 import React from "react";
-import { useSelector } from "react-redux/es/hooks/useSelector";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { ItemBasicInfo } from "./ItemBasicInfo";
 import { selectItemById } from "./itemsSlice";
+import { removeItem } from "./itemsSlice";
+import { removeItemFromCategory } from "../categories/categoriesSlice";
 
 export const ItemPage = () => {
+    const dispatch = useDispatch();
     const params = useParams();
     const navigate = useNavigate();
-    const item = useSelector(state => selectItemById(state, params.itemId));
+
+    const itemId = params.itemId
+    const item = useSelector(state => selectItemById(state, itemId));
+    const categoryId = item.categoryId;
     return (
         <div id="item-page">
             <ItemBasicInfo itemId={params.itemId} />
@@ -19,6 +25,16 @@ export const ItemPage = () => {
                     )
                 })}
             </ul>
+            <button 
+                onClick={ e => {
+                    e.preventDefault()
+                    dispatch(removeItemFromCategory({itemId, categoryId}))
+                    dispatch(removeItem(itemId))
+                    navigate(`/categories/${categoryId}`)
+                }}
+            >
+                Delete
+            </button>
             <button
                 onClick={ e => {
                     e.preventDefault()

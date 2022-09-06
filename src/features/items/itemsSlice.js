@@ -56,13 +56,13 @@ const itemsSlice = createSlice({
             state[itemId] = item;
         },
         removeItem(state, action){
-
+            delete state[action.payload]
         }
     }
 })
 
 export default itemsSlice.reducer
-export const {modifyItem} = itemsSlice.actions
+export const {modifyItem, removeItem} = itemsSlice.actions
 
 export const selectAllItems = state => state.items;
 export const selectItemById = (state, itemId) => state.items[itemId];
