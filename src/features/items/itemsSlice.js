@@ -52,9 +52,12 @@ const itemsSlice = createSlice({
     initialState,
     reducers: {
         modifyItem(state, action){
-            const {itemId} = action.payload
-            state[itemId] = action.payload
+            const {itemId, item} = action.payload
+            state[itemId] = item;
         },
+        removeItem(state, action){
+
+        }
     }
 })
 

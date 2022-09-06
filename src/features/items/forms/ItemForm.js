@@ -1,8 +1,8 @@
 import React, { useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
-import { addItemToCategory, selectAllCategories, removeItemFromCategory} from "../../categories/categoriesSlice"
+import { addItemToCategory, selectAllCategories, removeItemFromCategory } from "../../categories/categoriesSlice"
 import { modifyItem } from "../itemsSlice"
 
 export const ItemForm = (props) => {
@@ -30,6 +30,34 @@ export const ItemForm = (props) => {
         </option>
     )
 
+    const saveButton = <button
+        disabled={!canSubmit}
+        onClick={e => {
+            e.preventDefault()
+            if (props.formType === 'edit') {
+                dispatch(removeItemFromCategory({
+                    itemId: props.itemId,
+                    categoryId: props.prevCategoryId
+                }))
+            }
+
+            const item = {
+                title,
+                imgSource,
+                list,
+                percentOff,
+                stock,
+                categoryId,
+                features,
+            }
+            dispatch(modifyItem({ itemId: props.itemId, item }))
+            dispatch(addItemToCategory({ itemId: props.itemId, categoryId }))
+            navigate(`/items/${props.itemId}`)
+        }}
+    >
+        Save
+    </button>
+
     //add text area and delete button for each feature
     let featureBoxes = [];
     for (let i = 0; i < numFeatures; i++) {
@@ -56,57 +84,6 @@ export const ItemForm = (props) => {
             </li>
         );
 
-    }
-
-    let saveButton;
-    if (props.formType === 'add') {
-        saveButton = <button
-            disabled={!canSubmit}
-            onClick={e => {
-                e.preventDefault()
-                const item = {
-                    itemId: props.itemId,
-                    title,
-                    imgSource,
-                    list,
-                    percentOff,
-                    stock,
-                    categoryId,
-                    features,
-                }
-                dispatch(modifyItem(item))
-                dispatch(addItemToCategory({ itemId: props.itemId, categoryId }))
-                navigate(`/items/${props.itemId}`)
-            }}
-        >
-            Save
-        </button>
-    } else if (props.formType === 'edit') {
-        saveButton = <button
-        disabled={!canSubmit}
-        onClick={e => {
-            e.preventDefault()
-            dispatch( removeItemFromCategory({
-                itemId: props.itemId, 
-                categoryId: props.prevCategoryId
-            }) )
-            const item = {
-                itemId: props.itemId,
-                title,
-                imgSource,
-                list,
-                percentOff,
-                stock,
-                categoryId,
-                features,
-            }
-            dispatch( modifyItem(item) ) 
-            dispatch( addItemToCategory({itemId: props.itemId, categoryId}) )
-            navigate(`/items/${props.itemId}`)
-        }}
-        >
-            Save
-        </button>
     }
 
     return (
