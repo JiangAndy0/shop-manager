@@ -9,11 +9,20 @@ export const Home = () => {
     const navigate = useNavigate()
     const items = useSelector(selectAllItems)
     const itemIds = Object.keys(items)
-    const itemPreviews = itemIds.map(itemId => <ItemPreview itemId={itemId} key={itemId}/>);
+
+    const featuredItemPreviews = itemIds
+        .filter(itemId => items[itemId].isFeatured )
+        .map(itemId => <ItemPreview itemId={itemId} key={itemId}/>);
+    const otherItemPreviews = itemIds
+        .filter(itemId => !items[itemId].isFeatured )
+        .map(itemId => <ItemPreview itemId={itemId} key={itemId}/>);
 
     return(
         <main>
-            {itemPreviews}
+            <h2>Featured</h2>
+            {featuredItemPreviews.length > 0 ? featuredItemPreviews : <p>No Featured Items.</p>}
+            <h2>More Items</h2>
+            {otherItemPreviews}
             <button onClick={() => navigate('/categories/0/addItem')}>Add Item</button>
         </main>
     )

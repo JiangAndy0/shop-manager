@@ -22,6 +22,7 @@ export const EditItemForm = () => {
             categoryId={item.categoryId}
             features={item.features}
             numFeatures={item.features.length}
+            isFeatured={item.isFeatured}
             formType="edit"
             prevCategoryId={item.categoryId}
         />

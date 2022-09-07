@@ -21,6 +21,7 @@ export const ItemForm = (props) => {
     const [categoryId, setCategoryId] = useState(props.categoryId)
     const [features, setFeatures] = useState(props.features)
     const [numFeatures, setNumFeatures] = useState(props.numFeatures)
+    const [isFeatured, setIsFeatured] = useState(props.isFeatured)
 
     const canSubmit = title && imgSource && list && percentOff !== '' && stock && categoryId && features && numFeatures;
 
@@ -48,6 +49,7 @@ export const ItemForm = (props) => {
                 percentOff,
                 stock,
                 categoryId,
+                isFeatured,
                 features,
             }
             dispatch(modifyItem({ itemId: props.itemId, item }))
@@ -141,7 +143,7 @@ export const ItemForm = (props) => {
                 >
                     {categoryOptions}
                 </select>
-                <label htmlFor="featuresInput">Features</label>
+                <label htmlFor="featuresInput">Description</label>
                 {featureBoxes}
                 <button onClick={e => {
                     e.preventDefault()
@@ -150,6 +152,16 @@ export const ItemForm = (props) => {
                 }>
                     Add Feature
                 </button>
+                <label htmlFor="isFeatured">Featured</label>
+                <input
+                    type="checkbox"
+                    id="isFeatured"
+                    value={isFeatured}
+                    checked={isFeatured}
+                    onChange={e => {
+                        setIsFeatured(e.target.checked)
+                    }}
+                />
             </form>
         </div>
 

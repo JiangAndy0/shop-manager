@@ -23,6 +23,7 @@ export const AddItemForm = () => {
             categoryId={params.categoryId !== '0' ? params.categoryId : categoryIds[0]}
             features={[]}
             numFeatures={1}
+            isFeatured={false}
             formType="add"
         />
     )

@@ -15,7 +15,7 @@ export const ItemBasicInfo = ({itemId}) => {
     return (
         <section>
             <img src={item.imgSource} alt="thumbnail for item"/>
-            <h2>{item.title}</h2>
+            <h3>{item.title}</h3>
             {price}
             <p>{item.stock} left</p>
         </section>

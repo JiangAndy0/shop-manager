@@ -13,6 +13,7 @@ const initialState = {
         percentOff: "0",
         stock: 27,
         categoryId: "101",
+        isFeatured: false,
         features: [
             'Made of the finest, most durable Texan leather',
             'Waterproof: withstand the toughest rain in these boots',
@@ -26,6 +27,7 @@ const initialState = {
         percentOff: "25",
         stock: 193,
         categoryId: "101",
+        isFeatured: true,
         features: [
             'Made with 100% breathable, soft cotton',
             "Fits Men's sizes 6-12, Women's 10-15",
@@ -40,6 +42,7 @@ const initialState = {
         percentOff: "0",
         stock: 118,
         categoryId: "102",
+        isFeatured: false,
         features: [
             "Form fitting design shows off your figure",
             "Sweat and stain resistant so that nothing stops your gym sessions",
