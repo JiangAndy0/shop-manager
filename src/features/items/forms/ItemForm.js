@@ -114,6 +114,9 @@ export const ItemForm = (props) => {
                     value={imgSource}
                     onChange={e => setImgSource(e.target.value)}
                 />
+                <div className="img-container">
+                    <img src={imgSource} alt="Preview of item"/>
+                </div>
                 <label htmlFor="list">List Price</label>
                 <input
                     type="number"
