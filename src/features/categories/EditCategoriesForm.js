@@ -27,7 +27,8 @@ export const EditCategoriesForm = () => {
                     onChange={ e => {
                         setCategories(prev => {
                             const newCategories = prev.slice()
-                            newCategories[i] = e.target.value
+                            //capitalize the new value
+                            newCategories[i] = e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1)
                             return newCategories
                         })
                     }}
@@ -54,6 +55,7 @@ export const EditCategoriesForm = () => {
                 Cancel
             </button>
             <button
+                disabled={! (shopName && categories.length !== 0)}
                 onClick={e => {
                     e.preventDefault()
                     dispatch(changeShopName(shopName))
