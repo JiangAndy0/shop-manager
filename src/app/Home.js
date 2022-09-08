@@ -23,7 +23,7 @@ export const Home = () => {
             {featuredItemPreviews.length > 0 ? featuredItemPreviews : <p>No Featured Items.</p>}
             <h2>More Items</h2>
             {otherItemPreviews}
-            <button onClick={() => navigate('/categories/0/addItem')}>Add Item</button>
+            <button onClick={() => navigate('/addItem')}>Add Item</button>
         </main>
     )
 

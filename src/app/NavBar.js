@@ -9,18 +9,17 @@ export const NavBar = () => {
 
     const storeName = useSelector(state => state.shop.name)
     const categories = useSelector(selectAllCategories)
-    const categoryIds = Object.keys(categories)
     
     return (
         <nav>
             <Link to='/'>{storeName}</Link>
             { 
-                categoryIds.map(categoryId => 
+                categories.map(category => 
                     <Link 
-                        to={`/categories/${categoryId}`}
-                        key={categoryId}
+                        to={`/${category}`}
+                        key={category}
                     >
-                        {categories[categoryId].name}
+                        {category.charAt(0).toUpperCase() + category.slice(1)}
                     </Link>
                 )
             }

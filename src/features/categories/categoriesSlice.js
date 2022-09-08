@@ -2,37 +2,33 @@ import { createSlice } from "@reduxjs/toolkit"
 
 
 const initialState = {
-    "101": {
-        name: "Men",
-        items: { "1001": true, "1002": true}
-    },
-    "102": {
-        name: "Women",
-        items: { "1003": true}
-    }
+    "Men": {"1001": true, "1002": true},
+    "Women": {"1003": true}
 }
 const categoriesSlice = createSlice({
     name: 'categories',
     initialState,
     reducers: {
         addItemToCategory(state, action){
-            const {itemId, categoryId} = action.payload;
-            state[categoryId].items[itemId] = true;
+            const {itemId, category} = action.payload;
+            state[category.toLowerCase()][itemId] = true;
         },
         removeItemFromCategory(state, action){
-            const {itemId, categoryId} = action.payload
-            console.log(categoryId)
-            delete state[categoryId].items[itemId]
+            const {itemId, category} = action.payload
+            delete state[category.toLowerCase()][itemId]
         },
         modifyCategories(state, action){
-            //wipe all previous categories
-            const prevIds = Object.keys(state)
-            prevIds.forEach(id => delete state[id])
-            
-            const newCategories = Object.entries(action.payload)
-            newCategories.forEach(([categoryId, category]) => {
-                state[categoryId] = category
+            const newCategories = action.payload
+            const newCategoriesState = newCategories.map(category => {
+                return [category, state[category] ? state[category] : {}]
             })
+
+            //delete previous categories
+            const prevCategories = Object.keys(state)
+            prevCategories.forEach(category => delete state[category])
+
+            //set new categories
+            newCategoriesState.forEach(([category, items]) => state[category] = items)
         }
     }
 })
@@ -40,5 +36,5 @@ const categoriesSlice = createSlice({
 export default categoriesSlice.reducer
 export const {addItemToCategory, removeItemFromCategory, modifyCategories} = categoriesSlice.actions;
 
-export const selectAllCategories = state => state.categories
-export const selectCategoryById = (state, categoryId) => state.categories[categoryId]
+export const selectAllCategories = state => Object.keys(state.categories)
+export const selectCategoryItemIds = (state, category) => Object.keys(state.categories[category])

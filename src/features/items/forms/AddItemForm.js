@@ -7,10 +7,8 @@ import { selectAllCategories } from "../../categories/categoriesSlice"
 import { ItemForm } from "./ItemForm"
 
 export const AddItemForm = () => {
-    const params = useParams();
-    const categories = useSelector(selectAllCategories);
-    const categoryIds = Object.keys(categories);
-    console.log(categoryIds[0])
+    const params = useParams()
+    const categories = useSelector(selectAllCategories)
 
     return(
         <ItemForm
@@ -20,7 +18,7 @@ export const AddItemForm = () => {
             list={''}
             percentOff={'0'}
             stock={''}
-            categoryId={params.categoryId !== '0' ? params.categoryId : categoryIds[0]}
+            category={params.category ? params.category : categories[0]}
             features={[]}
             numFeatures={1}
             isFeatured={false}

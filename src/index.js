@@ -29,12 +29,13 @@ root.render(
         <Routes>
           <Route path="/" element={<App />}>
             <Route index element={<Home />}/>
-            <Route path="categories/:categoryId" element={<CategoryPage />}/>
-            <Route path="items/:itemId" element={<ItemPage />}/>
+            <Route path=":category" element={<CategoryPage />}/>
+            <Route path=":category/:itemId" element={<ItemPage />}/>
           </Route>
-          <Route path="categories/:categoryId/addItem" element={<AddItemForm />}/>
-          <Route path="items/:itemId/edit" element={<EditItemForm />}/>
+          <Route path=":category/addItem" element={<AddItemForm />}/>
+          <Route path=":category/:itemId/edit" element={<EditItemForm />}/>
           <Route path="edit" element={<EditCategoriesForm/>} />
+          <Route path="addItem" element={<AddItemForm />} />
         </Routes>
       </BrowserRouter>
     </Provider>

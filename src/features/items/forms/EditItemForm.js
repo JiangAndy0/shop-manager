@@ -19,12 +19,12 @@ export const EditItemForm = () => {
             list={item.list}
             percentOff={item.percentOff}
             stock={item.stock}
-            categoryId={item.categoryId}
+            category={item.category}
             features={item.features}
             numFeatures={item.features.length}
             isFeatured={item.isFeatured}
             formType="edit"
-            prevCategoryId={item.categoryId}
+            prevCategory={item.category}
         />
     )
 }

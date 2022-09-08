@@ -1,5 +1,4 @@
 import React, {useState} from "react"
-import { nanoid } from "@reduxjs/toolkit"
 import { useDispatch, useSelector } from "react-redux"
 
 import { changeShopName, selectShopName } from "../shop/shopSlice"
@@ -12,28 +11,23 @@ export const EditCategoriesForm = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
+    const categoriesObj = useSelector(state => state.categories)
     const prevShopName = useSelector(selectShopName)
     const prevCategories = useSelector(selectAllCategories)
-    const prevCategoryIds = Object.keys(prevCategories)
 
     const [shopName, setShopName] = useState(prevShopName)
-    const [categories, setCategories] = useState(prevCategoryIds.map( categoryId => {
-        return {
-            id: categoryId,
-            name: prevCategories[categoryId].name
-        }
-    }))
+    const [categories, setCategories] = useState(prevCategories)
 
     let categoryBoxes = []
     for(let i = 0; i < categories.length; i++){
         categoryBoxes.push(
             <li key={`categoryBox#${i}`}>
                 <textarea
-                    value={categories[i].name}
+                    value={categories[i]}
                     onChange={ e => {
                         setCategories(prev => {
                             const newCategories = prev.slice()
-                            newCategories[i].name = e.target.value
+                            newCategories[i] = e.target.value
                             return newCategories
                         })
                     }}
@@ -64,13 +58,8 @@ export const EditCategoriesForm = () => {
                     e.preventDefault()
                     dispatch(changeShopName(shopName))
                     //create a new categories state object
-                    const newCategories = {}
-                    categories.forEach( ({id, name}) => {
-                        const items = prevCategories[id] ? prevCategories[id].items : {};
-                        newCategories[id] = { name, items }
-                    })
-                    dispatch(modifyCategories(newCategories))
-                    dispatch(removeOrphanedItems(newCategories))
+                    dispatch(modifyCategories(categories))
+                    dispatch(removeOrphanedItems(categoriesObj))
                     navigate('/')
                 }}
             >
@@ -82,7 +71,7 @@ export const EditCategoriesForm = () => {
                     type="text"
                     value={shopName}
                     onChange={e => {
-                        setShopName(e.target.value)
+                        setShopName(e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1))
                     }}
                 />
                 <label htmlFor="categories">Categories</label>
@@ -92,7 +81,7 @@ export const EditCategoriesForm = () => {
                 <button
                     onClick={e => {
                         e.preventDefault()
-                        setCategories(prev => prev.concat([{id: nanoid(), name: ''}]))
+                        setCategories(prev => prev.concat(['']))
                     }}
                 >
                     Add Category

@@ -11,23 +11,22 @@ export const ItemForm = (props) => {
     const navigate = useNavigate();
 
     const categories = useSelector(selectAllCategories)
-    const categoryIds = Object.keys(categories)
 
     const [title, setTitle] = useState(props.title)
     const [imgSource, setImgSource] = useState(props.imgSource)
     const [list, setList] = useState(props.list)
     const [percentOff, setPercentOff] = useState(props.percentOff)
     const [stock, setStock] = useState(props.stock)
-    const [categoryId, setCategoryId] = useState(props.categoryId)
+    const [category, setCategory] = useState(props.category)
     const [features, setFeatures] = useState(props.features)
     const [numFeatures, setNumFeatures] = useState(props.numFeatures)
     const [isFeatured, setIsFeatured] = useState(props.isFeatured)
 
-    const canSubmit = title && imgSource && list && percentOff !== '' && stock && categoryId && features && numFeatures;
+    const canSubmit = title && imgSource && list && percentOff !== '' && stock && category && features && numFeatures;
 
-    const categoryOptions = categoryIds.map(categoryId =>
-        <option value={categoryId} key={categoryId}>
-            {categories[categoryId].name}
+    const categoryOptions = categories.map(category =>
+        <option value={category} key={category}>
+            {category}
         </option>
     )
 
@@ -38,7 +37,7 @@ export const ItemForm = (props) => {
             if (props.formType === 'edit') {
                 dispatch(removeItemFromCategory({
                     itemId: props.itemId,
-                    categoryId: props.prevCategoryId
+                    category: props.prevCategory
                 }))
             }
 
@@ -48,13 +47,13 @@ export const ItemForm = (props) => {
                 list,
                 percentOff,
                 stock,
-                categoryId,
+                category,
                 isFeatured,
                 features,
             }
             dispatch(modifyItem({ itemId: props.itemId, item }))
-            dispatch(addItemToCategory({ itemId: props.itemId, categoryId }))
-            navigate(`/items/${props.itemId}`)
+            dispatch(addItemToCategory({ itemId: props.itemId, category }))
+            navigate(`/${category}/${props.itemId}`)
         }}
     >
         Save
@@ -138,11 +137,11 @@ export const ItemForm = (props) => {
                     value={stock}
                     onChange={e => setStock(e.target.value)}
                 />
-                <label htmlFor="categoryId">Select Category</label>
+                <label htmlFor="category">Select Category</label>
                 <select
-                    id="categoryId"
-                    value={categoryId}
-                    onChange={e => setCategoryId(e.target.value)}
+                    id="category"
+                    value={category}
+                    onChange={e => setCategory(e.target.value)}
                 >
                     {categoryOptions}
                 </select>

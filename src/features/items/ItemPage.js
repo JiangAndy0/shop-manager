@@ -14,7 +14,7 @@ export const ItemPage = () => {
 
     const itemId = params.itemId
     const item = useSelector(state => selectItemById(state, itemId));
-    const categoryId = item.categoryId;
+    const category = item.category;
     return (
         <div id="item-page">
             <ItemBasicInfo itemId={params.itemId} />
@@ -28,9 +28,9 @@ export const ItemPage = () => {
             <button 
                 onClick={ e => {
                     e.preventDefault()
-                    dispatch(removeItemFromCategory({itemId, categoryId}))
+                    dispatch(removeItemFromCategory({itemId, category}))
                     dispatch(removeItem(itemId))
-                    navigate(`/categories/${categoryId}`)
+                    navigate(`/${category}`)
                 }}
             >
                 Delete

@@ -12,7 +12,7 @@ const initialState = {
         list: 25.99,
         percentOff: "0",
         stock: 27,
-        categoryId: "101",
+        category: "Men",
         isFeatured: false,
         features: [
             'Made of the finest, most durable Texan leather',
@@ -26,7 +26,7 @@ const initialState = {
         list: 14.99,
         percentOff: "25",
         stock: 193,
-        categoryId: "101",
+        category: "Men",
         isFeatured: true,
         features: [
             'Made with 100% breathable, soft cotton',
@@ -41,7 +41,7 @@ const initialState = {
         list: 17.99,
         percentOff: "0",
         stock: 118,
-        categoryId: "102",
+        category: "Women",
         isFeatured: false,
         features: [
             "Form fitting design shows off your figure",
@@ -62,10 +62,10 @@ const itemsSlice = createSlice({
             delete state[action.payload]
         },
         removeOrphanedItems(state, action){
-            const categories = action.payload
+            const categoriesObj = action.payload
             const itemIds = Object.keys(state)
             itemIds.forEach(itemId => {
-                if(!categories[ state[itemId].categoryId ]) {
+                if(!categoriesObj[ state[itemId].category ]) {
                     delete state[itemId]
                 }
             })
